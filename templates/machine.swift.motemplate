@@ -28,15 +28,15 @@ enum <$managedObjectClassName$>UserInfo: String {<$foreach UserInfo userInfoKeyV
 <$endif$>
 
 @objc
-class _<$managedObjectClassName$>: <$customSuperentity$> {
+public class _<$managedObjectClassName$>: <$customSuperentity$> {
 
     // MARK: - Class methods
     
-    <$if hasCustomSuperentity$>override <$endif$>class func entityName () -> String {
+    <$if hasCustomSuperentity$>override <$endif$>public class func entityName () -> String {
         return "<$name$>"
     }
 
-    <$if hasCustomSuperentity$>override <$endif$>class func entity(managedObjectContext: NSManagedObjectContext!) -> NSEntityDescription! {
+    <$if hasCustomSuperentity$>override <$endif$>public class func entity(managedObjectContext: NSManagedObjectContext!) -> NSEntityDescription! {
         return NSEntityDescription.entityForName(self.entityName(), inManagedObjectContext: managedObjectContext);
     }
 
@@ -60,7 +60,7 @@ class _<$managedObjectClassName$>: <$customSuperentity$> {
     let <$Attribute.name$>: NSNumber?
 <$else$>
     @NSManaged
-    var <$Attribute.name$>: NSNumber?
+    public var <$Attribute.name$>: NSNumber?
 <$endif$>
 <$else$>
 <$if Attribute.isReadonly$>
@@ -68,7 +68,7 @@ class _<$managedObjectClassName$>: <$customSuperentity$> {
     let <$Attribute.name$>: <$Attribute.objectAttributeType$><$if Attribute.isOptional$>?<$endif$>
 <$else$>
     @NSManaged
-    var <$Attribute.name$>: <$Attribute.objectAttributeType$><$if Attribute.isOptional$>?<$endif$>
+    public var <$Attribute.name$>: <$Attribute.objectAttributeType$><$if Attribute.isOptional$>?<$endif$>
 <$endif$>
 <$endif$>
     // func validate<$Attribute.name.initialCapitalString$>(value: AutoreleasingUnsafePointer<AnyObject>, error: NSErrorPointer) {}
@@ -79,11 +79,11 @@ class _<$managedObjectClassName$>: <$customSuperentity$> {
 <$foreach Relationship noninheritedRelationships do$>
 <$if Relationship.isToMany$>
     @NSManaged
-    var <$Relationship.name$>: <$Relationship.immutableCollectionClassName$>
+    public var <$Relationship.name$>: <$Relationship.immutableCollectionClassName$>
 
 <$else$>
     @NSManaged
-    var <$Relationship.name$>: <$Relationship.destinationEntity.managedObjectClassName$><$if Relationship.isOptional$>?<$endif$>
+    public var <$Relationship.name$>: <$Relationship.destinationEntity.managedObjectClassName$><$if Relationship.isOptional$>?<$endif$>
 
     // func validate<$Relationship.name.initialCapitalString$>(value: AutoreleasingUnsafePointer<AnyObject>, error: NSErrorPointer) {}
 <$endif$>
